@@ -846,7 +846,7 @@ function Blacklib:Window(version)
                 end)
 			end
 
-			function ItemSection:Keybind(title, Key, callback)
+			function ItemSection:Keybind(title, preset, callback)
 				-- Instances:
 				local KeybindFrame = Instance.new("Frame")
 				local Title = Instance.new("TextLabel")
@@ -882,15 +882,14 @@ function Blacklib:Window(version)
 				Button.Font = Enum.Font.SourceSansBold
 				Button.TextColor3 = Color3.fromRGB(0, 0, 0)
 				Button.TextSize = 14.000
-				Button.Text = Key
+				Button.Text = preset.Name
 
                 UICorner.Parent = Button
                 UICorner.CornerRadius = UDim.new(0, 5)
 
 				-- Modul
-				local Key = preset.Name
 				Button.MouseButton1Click:Connect(function()
-					Button.Text = Key
+					Button.Text = ""
 					local inputwait = game:GetService("UserInputService").InputBegan:wait()
 					if inputwait.KeyCode.Name ~= "Unknown" then
 						Button.Text = inputwait.KeyCode.Name
