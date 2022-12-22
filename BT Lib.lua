@@ -893,7 +893,7 @@ function Blacklib:Window(version)
 					Button.Text = "..."
 					local inputwait = game:GetService("UserInputService").InputBegan:wait()
 					if inputwait.KeyCode.Name ~= "Unknown" then
-						preset = inputwait.KeyCode.Name
+						Button.Text = inputwait.KeyCode.Name
 						Key = inputwait.KeyCode.Name
 					end
 				end)
