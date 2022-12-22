@@ -890,7 +890,7 @@ function Blacklib:Window(version)
 				-- Modul
 				local UserInputService = game:GetService("UserInputService")
                 Button.MouseButton1Click:Connect(function()
-					Button.Text = Key
+					Button.Text = "..."
 					local inputwait = game:GetService("UserInputService").InputBegan:wait()
 					if inputwait.KeyCode.Name ~= "Unknown" then
 						Button.Text = inputwait.KeyCode.Name
