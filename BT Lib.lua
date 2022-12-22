@@ -72,10 +72,10 @@ function Blacklib:Window(version)
 	BlackTitle.BackgroundTransparency = 1.000
 	BlackTitle.Position = UDim2.new(0.0795286521, 0, 0.0458333418, 0)
 	BlackTitle.Size = UDim2.new(0, 300, 0, 30)
-	BlackTitle.Font = Enum.Font.Ubuntu
+	BlackTitle.Font = Enum.Font.SourceSansBold
 	BlackTitle.Text = "BLACKTRAP "..version
 	BlackTitle.TextColor3 = Color3.fromRGB(31, 31, 31)
-	BlackTitle.TextSize = 20.000
+	BlackTitle.TextSize = 16.000
 	BlackTitle.TextXAlignment = Enum.TextXAlignment.Left
 
 	CloseButton.Name = "CloseButton"
@@ -846,9 +846,8 @@ function Blacklib:Window(version)
                 end)
 			end
 
-			function ItemSection:Keybind(title, KeyCode, callback)
+			function ItemSection:Keybind(title, preset, callback)
 				-- Instances:
-                local data_bind = {}
 				local KeybindFrame = Instance.new("Frame")
 				local Title = Instance.new("TextLabel")
 				local Button = Instance.new("TextButton")
@@ -883,61 +882,28 @@ function Blacklib:Window(version)
 				Button.Font = Enum.Font.SourceSansBold
 				Button.TextColor3 = Color3.fromRGB(0, 0, 0)
 				Button.TextSize = 14.000
-				Button.Text = KeyCode.Name
+				Button.Text = preset.Name
 
                 UICorner.Parent = Button
                 UICorner.CornerRadius = UDim.new(0, 5)
 
 				-- Modul
-                local UIS = game:GetService("UserInputService")
-                keybind_name = tostring(keybind_name)
-                callback = typeof(callback) == "function" and callback or function() end
-                KeyCode = typeof(KeyCode) == "table" and KeyCode or {}
-                KeyCode = {
-                    ["standard"] = KeyCode.standard or Enum.KeyCode.RightShift,
-                }
-
-                local typeof_bind = {
-                    RightShift = "RShift",
-                    LeftShift = "LShift",
-                    RightControl = "RightCtrl",
-                    LeftControl = "LeftCtrl",
-                    MouseButton1 = "Mouse1"
-                }
-
-                local checks = {
-                    binding = false,
-                }
-
-                function data_bind:SetKeybind(Keybinds)
-                    local Key = shortkeys[Keybinds.Name] or Keybinds.Name
-                    Button.Text = Key
-                    keybinds = Keybinds
-                end
-
-                UIS.InputBegan:Connect(function (a, b)
-                    if checks.binding then
-                        spawn(function ()
-                            wait()
-                            checks.binding = false
-                        end)
-                        return
-                    end
-                    if a.Code == keybinds and not b then
-                        pcall(callback, keybinds)
-                    end
-                end)
-
-                data_bind:SetKeybind(KeyCode.standard)
-
-                Button.MouseButton1Click:Connect(function ()
-                    if checks.binding then return end
-                    Button.Text = "..."
-                    checks.binding = true
-                    local a, b = UIS.InputBegan:wait()
-                    data_bind:SetKeybind(a.Code)
-                end)
-                return data_bind
+				local UserInputService = game:GetService("UserInputService")
+                Button.MouseButton1Click:Connect(function()
+					Button.Text = ". . ."
+					local inputwait = game:GetService("UserInputService").InputBegan:wait()
+					if inputwait.KeyCode.Name ~= "Unknown" then
+						Button.Text = inputwait.KeyCode.Name
+						Key = inputwait.KeyCode.Name
+					end
+				end)
+				UserInputService.InputBegan:Connect(function(current, pressed)
+					if not pressed then
+						if current.KeyCode.Name == Key then
+							pcall(callback)
+						end
+					end
+				end)
             end
 			return ItemSection
 		end
