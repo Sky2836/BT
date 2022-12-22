@@ -882,16 +882,15 @@ function Blacklib:Window(version)
 				Button.Font = Enum.Font.SourceSansBold
 				Button.TextColor3 = Color3.fromRGB(0, 0, 0)
 				Button.TextSize = 14.000
-				Button.Text = preset.Name or ""
+				Button.Text = preset
 
                 UICorner.Parent = Button
                 UICorner.CornerRadius = UDim.new(0, 5)
 
 				-- Modul
-				preset.Name = Key
 				local UserInputService = game:GetService("UserInputService")
                 Button.MouseButton1Click:Connect(function()
-					Button.Text = ". . ."
+					Button.Text = Key
 					local inputwait = game:GetService("UserInputService").InputBegan:wait()
 					if inputwait.KeyCode.Name ~= "Unknown" then
 						Button.Text = inputwait.KeyCode.Name
