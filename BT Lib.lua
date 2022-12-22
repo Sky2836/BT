@@ -882,12 +882,13 @@ function Blacklib:Window(version)
 				Button.Font = Enum.Font.SourceSansBold
 				Button.TextColor3 = Color3.fromRGB(0, 0, 0)
 				Button.TextSize = 14.000
-				Button.Text = preset.Name
+				Button.Text = preset.Name or ""
 
                 UICorner.Parent = Button
                 UICorner.CornerRadius = UDim.new(0, 5)
 
 				-- Modul
+				preset.Name = Key
 				local UserInputService = game:GetService("UserInputService")
                 Button.MouseButton1Click:Connect(function()
 					Button.Text = ". . ."
