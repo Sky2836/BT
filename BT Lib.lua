@@ -73,7 +73,7 @@ function Blacklib:Window(version)
 	BlackTitle.Position = UDim2.new(0.0795286521, 0, 0.0458333418, 0)
 	BlackTitle.Size = UDim2.new(0, 300, 0, 30)
 	BlackTitle.Font = Enum.Font.Ubuntu
-	BlackTitle.Text = "BLACKTRAP "..SourceSansBold
+	BlackTitle.Text = "BLACKTRAP "..version
 	BlackTitle.TextColor3 = Color3.fromRGB(31, 31, 31)
 	BlackTitle.TextSize = 20.000
 	BlackTitle.TextXAlignment = Enum.TextXAlignment.Left
