@@ -875,7 +875,7 @@ function Blacklib:Window(version)
 
 				Button.Name = "Button"
 				Button.Parent = KeybindFrame
-				Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Button.BackgroundColor3 = Color3.fromRGB(212, 212, 212)
 				Button.BorderSizePixel = 0
 				Button.Position = UDim2.new(0, 263, 0, 0)
 				Button.Size = UDim2.new(0, 100, 0, 20)
