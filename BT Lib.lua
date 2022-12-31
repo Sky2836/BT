@@ -1498,9 +1498,10 @@ spawn(function()
 end)
 
 Blacklib:Button("Credit", function()
-    Blacklib:Notification("• Developer = Ѕαиz#1594\n• Community Management = Jey#4690 & 𝒢𝒾𝓇𝓁𝓎#5171\n• Staff Team = Leah.#1548")
+    Blacklib:Notification("• Developer = Ѕαиz#1594\n• Community Management = Jey#4690 & Girly#5171\n• Staff Team = Leah.#1548")
 end)
 
 Blacklib:Button("Changelog", function ()
 	Blacklib:Notification("31/12/2022\n• New UI Design\n• Fixed at last bug\n• Update Blox Fruit")
 end)
+return Blacklib
