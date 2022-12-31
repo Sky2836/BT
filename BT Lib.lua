@@ -492,7 +492,7 @@ function Blacklib:Window(version)
 		NotificationDesc.Font = Enum.Font.SourceSansBold
 		NotificationDesc.Text = textdesc
 		NotificationDesc.TextColor3 = Color3.fromRGB(208, 208, 208)
-		NotificationDesc.TextSize = 12.000
+		NotificationDesc.TextSize = 14.000
 		NotificationDesc.TextXAlignment = Enum.TextXAlignment.Left
 		NotificationDesc.TextYAlignment = Enum.TextYAlignment.Top
 
