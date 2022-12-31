@@ -33,6 +33,7 @@ function Blacklib:Window(version)
 	local TabWindowList = Instance.new("UIListLayout")
 	local ContainerHold = Instance.new("Frame")
 	local ContainerItem = Instance.new("Folder")
+	local SettingButton = Instance.new("ImageButton")
 
 	--Properties:
 	Points.Name = "Points"
@@ -47,7 +48,7 @@ function Blacklib:Window(version)
 	WindowFrame.BorderColor3 = Color3.fromRGB(190, 190, 190)
 	WindowFrame.BorderSizePixel = 0
 	WindowFrame.ClipsDescendants = true
-	WindowFrame.Position = UDim2.new(0.245614037, 0, 0.140641019, 0)
+	WindowFrame.Position = UDim2.new(0, 220, 0, 50)
 	WindowFrame.Size = UDim2.new(0, 550, 0, 0)
 	WindowFrame:TweenSize(UDim2.new(0, 550, 0, 350), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, .6, true)
 
@@ -81,18 +82,29 @@ function Blacklib:Window(version)
 	CloseButton.Name = "CloseButton"
 	CloseButton.Parent = TopFrame
 	CloseButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	CloseButton.BackgroundTransparency = 1.000
 	CloseButton.BorderSizePixel = 0
-	CloseButton.Position = UDim2.new(0.941538393, 0, 0.100000232, 0)
-	CloseButton.Size = UDim2.new(0, 25, 0, 25)
+	CloseButton.Position = UDim2.new(0, 525, 0, 3)
+	CloseButton.Size = UDim2.new(0, 22, 0, 22)
 	CloseButton.Image = "http://www.roblox.com/asset/?id=8546705275"
 
 	Minimize.Name = "Minimize"
 	Minimize.Parent = TopFrame
 	Minimize.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Minimize.BackgroundTransparency = 1.000
 	Minimize.BorderSizePixel = 0
-	Minimize.Position = UDim2.new(0.89538455, 0, 0.100000009, 0)
-	Minimize.Size = UDim2.new(0, 25, 0, 25)
+	Minimize.Position = UDim2.new(0, 500, 0, 3)
+	Minimize.Size = UDim2.new(0, 22, 0, 22)
 	Minimize.Image = "http://www.roblox.com/asset/?id=8546702233"
+
+	SettingButton.Name = "SettingButton"
+	SettingButton.Parent = TopFrame
+	SettingButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	SettingButton.BackgroundTransparency = 1.000
+	SettingButton.BorderSizePixel = 0
+	SettingButton.Position = UDim2.new(0, 476, 0, 5)
+	SettingButton.Size = UDim2.new(0, 20, 0, 19)
+	SettingButton.Image = "http://www.roblox.com/asset/?id=11937378494"
 
 	TabWindow.Name = "TabWindow"
 	TabWindow.Parent = WindowFrame
@@ -128,6 +140,60 @@ function Blacklib:Window(version)
 	TabWindow.CanvasSize = UDim2.new(0, 0, 0, 0 + TabWindowList.AbsoluteContentSize.Y)
 	TabWindowList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 		TabWindow.CanvasSize = UDim2.new(0, 0, 0, 0 + TabWindowList.AbsoluteContentSize.Y)
+	end)
+
+	-- Setting Added
+	local SettingFrame = Instance.new("Frame")
+	local ScrollingFrame = Instance.new("ScrollingFrame")
+	local SettingLayout = Instance.new("UIListLayout")
+
+	SettingFrame.Name = "SettingFrame"
+	SettingFrame.Parent = WindowFrame
+	SettingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	SettingFrame.BackgroundTransparency = 0.400
+	SettingFrame.BorderSizePixel = 0
+	SettingFrame.ClipsDescendants = true
+	SettingFrame.Position = UDim2.new(0, 0, 0.0885714293, 0)
+	SettingFrame.Size = UDim2.new(0, 550, 0, 319)
+	SettingFrame.Visible = false
+
+	ScrollingFrame.Parent = SettingFrame
+	ScrollingFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	ScrollingFrame.Position = UDim2.new(0.272487164, 0, 0.0540894121, 0)
+	ScrollingFrame.Size = UDim2.new(0, 250, 0, 0)
+	ScrollingFrame.ClipsDescendants = true
+	ScrollingFrame.ScrollBarThickness = 0
+
+	SettingLayout.Parent = ScrollingFrame
+	SettingLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	SettingLayout.Padding = UDim.new(0, 5)
+	SettingLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+	SettingLayout.FillDirection = Enum.FillDirection.Vertical
+
+	ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0 + SettingLayout.AbsoluteContentSize.Y)
+	SettingLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+		ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0 + SettingLayout.AbsoluteContentSize.Y)
+	end)
+
+	local settog = true
+	
+	SettingButton.MouseLeave:Connect(function()
+	    TweenService:Create(SettingButton, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 20, 0, 19)}):Play()
+	end)
+    SettingButton.MouseEnter:Connect(function()
+        TweenService:Create(SettingButton, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 19, 0, 18)}):Play()
+    end)
+
+	SettingButton.MouseButton1Click:Connect(function ()
+		if settog == true then
+			SettingFrame.Visible = true
+			game.TweenService:Create(ScrollingFrame, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 250, 0, 290)}):Play()
+		else
+			game.TweenService:Create(ScrollingFrame, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 250, 0, 0)}):Play()
+			wait(.1)
+			SettingFrame.Visible = false
+		end
+		settog = not settog
 	end)
 
 	-- Local Script
@@ -170,7 +236,7 @@ function Blacklib:Window(version)
 
 	local mintog = false
 	Minimize.MouseLeave:Connect(function()
-	    TweenService:Create(Minimize, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 25, 0, 25)}):Play()
+	    TweenService:Create(Minimize, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 22, 0, 22)}):Play()
 	end)
     
     Minimize.MouseEnter:Connect(function()
@@ -179,11 +245,15 @@ function Blacklib:Window(version)
 	
 	Minimize.MouseButton1Click:Connect(function()
 		if mintog == true then
+		    settog = true
 			game.TweenService:Create(WindowFrame, TweenInfo.new(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 550, 0, 350)}):Play()
 			wait(0.5)
 			game.TweenService:Create(TabWindow, TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Visible = true}):Play()
 			game.TweenService:Create(ContainerHold, TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Visible = true}):Play()
 		else
+		    settog = false
+		    game.TweenService:Create(ScrollingFrame, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 250, 0, 0)}):Play()
+			SettingFrame.Visible = false
 			game.TweenService:Create(WindowFrame, TweenInfo.new(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 550, 0, 30)}):Play()
 			game.TweenService:Create(TabWindow, TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Visible = false}):Play()
 			game.TweenService:Create(ContainerHold, TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Visible = false}):Play()
@@ -192,7 +262,7 @@ function Blacklib:Window(version)
 	end)
 	
 	CloseButton.MouseLeave:Connect(function()
-	    TweenService:Create(CloseButton, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 25, 0, 25)}):Play()
+	    TweenService:Create(CloseButton, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 22, 0, 22)}):Play()
 	end)
     
     CloseButton.MouseEnter:Connect(function()
@@ -202,6 +272,127 @@ function Blacklib:Window(version)
 	CloseButton.MouseButton1Click:Connect(function()
 		game:GetService("CoreGui"):FindFirstChild("BlackTrap"):Destroy()
 	end)
+
+	function Blacklib:Button(text, callback)
+		-- Instances:
+		local Frame = Instance.new("Frame")
+		local TextButton = Instance.new("TextButton")
+		local UICorner = Instance.new("UICorner")
+
+		--Properties:
+		Frame.Parent = ScrollingFrame
+		Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Frame.BackgroundTransparency = 1.000
+		Frame.BorderSizePixel = 0
+		Frame.Size = UDim2.new(0, 250, 0, 24)
+
+		TextButton.Parent = Frame
+		TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TextButton.Position = UDim2.new(0.200000003, 0, 0, 3)
+		TextButton.Size = UDim2.new(0, 150, 0, 18)
+		TextButton.Font = Enum.Font.SourceSansBold
+		TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+		TextButton.TextSize = 12.000
+		TextButton.Text = text
+
+		UICorner.CornerRadius = UDim.new(0, 4)
+		UICorner.Parent = TextButton
+		-- Local Script
+		local callBackDebounce = false
+		TextButton.MouseEnter:Connect(function()
+			TweenService:Create(TextButton, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextSize = 10.000}):Play()
+			TweenService:Create(TextButton, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 150, 0, 16)}):Play()
+		end)
+		
+		TextButton.MouseLeave:Connect(function()
+			TweenService:Create(TextButton, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextSize = 12.000}):Play()
+			TweenService:Create(TextButton, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 150, 0, 18)}):Play()
+		end)
+		
+		TextButton.MouseButton1Click:Connect(function()
+			if not callBackDebounce then
+				callBackDebounce = true
+				callback()
+				wait(0.5)
+				callBackDebounce = false
+			end
+		end)
+	end
+	
+	function Blacklib:Textbox(text, textbox, callback)
+		-- Instances:
+		local Frame = Instance.new("Frame")
+		local TextLabel = Instance.new("TextLabel")
+		local TextBox = Instance.new("TextBox")
+		--Properties:
+		Frame.Parent = ScrollingFrame
+		Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Frame.BackgroundTransparency = 1.000
+		Frame.BorderSizePixel = 0
+		Frame.Size = UDim2.new(0, 250, 0, 30)
+
+		TextLabel.Parent = Frame
+		TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel.BackgroundTransparency = 1.000
+		TextLabel.BorderSizePixel = 0
+		TextLabel.Position = UDim2.new(0, 5, 0, 3)
+		TextLabel.Size = UDim2.new(0, 100, 0, 24)
+		TextLabel.Font = Enum.Font.SourceSansBold
+		TextLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+		TextLabel.TextSize = 14.000
+		TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+		TextLabel.Text = "• "..text
+
+		TextBox.Parent = Frame
+		TextBox.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+		TextBox.Position = UDim2.new(0, 140, 0, 3)
+		TextBox.Size = UDim2.new(0, 100, 0, 24)
+		TextBox.Font = Enum.Font.SourceSansBold
+		TextBox.Text = ""
+		TextBox.TextColor3 = Color3.fromRGB(180, 180, 180)
+		TextBox.TextSize = 14.000
+		TextBox.PlaceholderText = textbox or ""
+		TextBox.PlaceholderColor3 = Color3.fromRGB(180, 180, 180)
+
+		-- Local Script
+		TextBox.FocusLost:Connect(function()
+			if not EnterPressed then
+				callback(TextBox.Text)
+				return
+			end
+			TextBox.Text = textbox
+		end)
+	end
+
+	function Blacklib:Label(text)
+		local labelfunc = {}
+		local Frame = Instance.new("Frame")
+		local TextLabel = Instance.new("TextLabel")
+                
+		-- Prop --
+		Frame.Name = "Frame"
+		Frame.Parent = ScrollingFrame
+		Frame.BackgroundColor3 = Color3.fromRGB(190, 190, 190)
+		Frame.BackgroundTransparency = 0
+		Frame.BorderSizePixel = 0
+		Frame.Size = UDim2.new(0, 250, 0, 25)
+                
+		TextLabel.Name = "TextLabel"
+		TextLabel.Parent = Frame
+		TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel.BackgroundTransparency = 1.000
+		TextLabel.Position = UDim2.new(0, 0, 0, 2)
+		TextLabel.Size = UDim2.new(0, 250, 0, 21)
+		TextLabel.Font = Enum.Font.SourceSansBold
+		TextLabel.Text = text
+		TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+		TextLabel.TextSize = 15.000
+		-- Local Script
+		function labelfunc:Refresh(newtext)
+			TextLabel.Text = newtext
+		end
+		return labelfunc
+	end
 
 	function Blacklib:Notification(textdesc)
 		local NotificationHold = Instance.new("TextButton")
@@ -298,7 +489,7 @@ function Blacklib:Window(version)
 		NotificationDesc.BorderSizePixel = 0
 		NotificationDesc.Position = UDim2.new(0.0250000004, 0, 0.155999988, 0)
 		NotificationDesc.Size = UDim2.new(0, 380, 0, 160)
-		NotificationDesc.Font = Enum.Font.Ubuntu
+		NotificationDesc.Font = Enum.Font.SourceSansBold
 		NotificationDesc.Text = textdesc
 		NotificationDesc.TextColor3 = Color3.fromRGB(208, 208, 208)
 		NotificationDesc.TextSize = 12.000
@@ -1104,4 +1295,212 @@ function Blacklib:Window(version)
 	end
 	return Tabs
 end
-return Blacklib
+
+local Window = Blacklib:Window("UI v1.4")
+Blacklib:Label("SETTINGS")
+Blacklib:Textbox("Speed Hack", "Input", function (speed)
+	game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = speed
+    while speed do wait()
+        game:GetService("Players").LocalPlayer.Character.Movement.Disabled = true
+    end
+end)
+Blacklib:Textbox("Jump Hack", "Input", function (jump)
+	game:GetService("Players").LocalPlayer.Character.Humanoid.JumpPower = jump
+end)
+
+local GC = getconnections or get_signal_cons
+if GC then
+    for i,v in pairs(GC(game.Players.LocalPlayer.Idled)) do
+        if v["Disable"] then
+            v["Disable"](v)
+        elseif v["Disconnect"] then
+            v["Disconnect"](v)
+        end
+    end
+else
+    print("Unlucky.")
+    local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+        vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        wait(1)
+        vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    end)
+end
+
+Blacklib:Button("FPS Boost", function()
+	local decalsyeeted = true
+	local g = game
+	local w = g.Workspace
+	local l = g.Lighting
+	local t = w.Terrain
+	t.WaterWaveSize = 0
+	t.WaterWaveSpeed = 0
+	t.WaterReflectance = 0
+	t.WaterTransparency = 0
+	l.GlobalShadows = false
+	l.FogEnd = 9e9
+	l.Brightness = 0
+	settings().Rendering.QualityLevel = "Level01"
+	for i, v in pairs(g:GetDescendants()) do
+		if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
+			v.Material = "Plastic"
+			v.Reflectance = 0
+		elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+			v.Transparency = 1
+		elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+			v.Lifetime = NumberRange.new(0)
+		elseif v:IsA("Explosion") then
+			v.BlastPressure = 1
+			v.BlastRadius = 1
+		elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+			v.Enabled = false
+		elseif v:IsA("MeshPart") then
+			v.Material = "Plastic"
+			v.Reflectance = 0
+			v.TextureID = 10385902758728957
+		end
+	end
+	for i, e in pairs(l:GetChildren()) do
+		if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+			e.Enabled = false
+		end
+	end
+end)
+
+Blacklib:Button("Rejoin", function()
+	game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+Blacklib:Button("Server Hop", function()
+	local PlaceID = game.PlaceId
+	local AllIDs = {}
+	local foundAnything = ""
+	local actualHour = os.date("!*t").hour
+	local Deleted = false
+	function TPReturner()
+		local Site;
+		if foundAnything == "" then
+			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+		else
+			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+		end
+		local ID = ""
+		if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+			foundAnything = Site.nextPageCursor
+		end
+		local num = 0;
+		for i,v in pairs(Site.data) do
+			local Possible = true
+			ID = tostring(v.id)
+			if tonumber(v.maxPlayers) > tonumber(v.playing) then
+				for _,Existing in pairs(AllIDs) do
+					if num ~= 0 then
+						if ID == tostring(Existing) then
+							Possible = false
+						end
+					else
+						if tonumber(actualHour) ~= tonumber(Existing) then
+							local delFile = pcall(function()
+								-- delfile("NotSameServers.json")
+								AllIDs = {}
+								table.insert(AllIDs, actualHour)
+							end)
+						end
+					end
+					num = num + 1
+				end
+				if Possible == true then
+					table.insert(AllIDs, ID)
+					wait()
+					pcall(function()
+						-- writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+						wait()
+						game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+					end)
+					wait(.1)
+				end
+			end
+		end
+	end
+	function Teleport() 
+		while wait() do
+			pcall(function()
+				TPReturner()
+				if foundAnything ~= "" then
+					TPReturner()
+				end
+			end)
+		end
+	end
+	Teleport()
+end)
+
+Blacklib:Button("Teleport To Lower Server",function()
+	local maxplayers, gamelink, goodserver, data_table = math.huge, "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
+	if not _G.FailedServerID then _G.FailedServerID = {} end
+
+	local function serversearch()
+		data_table = game:GetService"HttpService":JSONDecode(game:HttpGetAsync(gamelink))
+		for _, v in pairs(data_table.data) do
+			pcall(function()
+				if type(v) == "table" and v.id and v.playing and tonumber(maxplayers) > tonumber(v.playing) and not table.find(_G.FailedServerID, v.id) then
+					maxplayers = v.playing
+					goodserver = v.id
+				end
+			end)
+		end
+	end
+
+	function getservers()
+		pcall(serversearch)
+		for i, v in pairs(data_table) do
+			if i == "nextPageCursor" then
+				if gamelink:find"&cursor=" then
+					local a = gamelink:find"&cursor="
+					local b = gamelink:sub(a)
+					gamelink = gamelink:gsub(b, "")
+				end
+				gamelink = gamelink .. "&cursor=" .. v
+				pcall(getservers)
+			end
+		end
+	end
+
+	pcall(getservers)
+	wait()
+	if goodserver == game.JobId or maxplayers == #game:GetService"Players":GetChildren() - 1 then
+	end
+	table.insert(_G.FailedServerID, goodserver)
+	game:GetService"TeleportService":TeleportToPlaceInstance(game.PlaceId, goodserver)
+end)
+spawn(function()
+    while wait() do
+        pcall(function()
+            if not game:IsLoaded() then
+                game.Loaded:Wait()
+            end
+            game.CoreGui.RobloxPromptGui.promptOverlay.DescendantAdded:Connect(function()
+                local GUI = game.CoreGui.RobloxPromptGui.promptOverlay:FindFirstChild("ErrorPrompt")
+                if GUI then
+                    if GUI.TitleFrame.ErrorTitle.Text == "Disconnected" then
+                        if #game.Players:GetPlayers() <= 1 then
+                            game.Players.LocalPlayer:Kick("\nRejoining...")
+                            wait()
+                            game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+                        else
+                            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+                        end
+                    end
+                end
+            end)
+        end)
+    end
+end)
+
+Blacklib:Button("Credit", function()
+    Blacklib:Notification("• Developer = Ѕαиz#1594\n• Community Management = Jey#4690 & 𝒢𝒾𝓇𝓁𝓎#5171\n• Staff Team = Leah.#1548")
+end)
+
+Blacklib:Button("Changelog", function ()
+	Blacklib:Notification("31/12/2022\n• New UI Design\n• Fixed at last bug\n• Update Blox Fruit")
+end)
