@@ -169,7 +169,9 @@ function Blacktrap.CreateLib(blackName, themeList)
     if not themeList then
         themeList = themes
     end
-    if themeList == "DarkTheme" then
+    if themeList == "Default" then
+        themeList = themeStyles.Default
+    elseif themeList == "DarkTheme" then
         themeList = themeStyles.DarkTheme
     elseif themeList == "LightTheme" then
         themeList = themeStyles.LightTheme
@@ -395,6 +397,7 @@ function Blacktrap.CreateLib(blackName, themeList)
     openBT.Size = UDim2.new(0, 52, 0, 44)
     openBT.Image = "http://www.roblox.com/asset/?id=12021503727"
     openBT.ImageColor3 = Color3.fromRGB(255, 0, 0)
+    
     openBT.MouseButton1Click:Connect(function()
         if openBTclose then
             game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
