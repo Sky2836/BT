@@ -1,3 +1,4 @@
+
 local Blacktrap = {}
 
 local tween = game:GetService("TweenService")
@@ -55,6 +56,14 @@ local themes = {
     ElementColor = Color3.fromRGB(45, 45, 45)
 }
 local themeStyles = {
+    Default = {
+        SchemeColor = Color3.fromRGB(30, 30, 30),
+        Background = Color3.fromRGB(12, 12, 12),
+        CoverFrame = Color3.fromRGB(76, 76, 76),
+        TextColor = Color3.fromRGB(200,200,200),
+        ImageColor = Color3.fromRGB(255, 255, 255),
+        ElementColor = Color3.fromRGB(45, 45, 45)
+    },
     DarkTheme = {
         SchemeColor = Color3.fromRGB(64, 64, 64),
         Background = Color3.fromRGB(0, 0, 0),
@@ -100,7 +109,7 @@ local themeStyles = {
         Background = Color3.fromRGB(44, 62, 82),
         CoverFrame = Color3.fromRGB(57, 81, 105),
         TextColor = Color3.fromRGB(255, 255, 255),
-        ImageColor = Color3.fromRGB(255,255,255)
+        ImageColor = Color3.fromRGB(255,255,255),
         ElementColor = Color3.fromRGB(52, 74, 95)
     },
     Sentinel = {
